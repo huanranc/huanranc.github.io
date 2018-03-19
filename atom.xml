@@ -3,11 +3,11 @@
   <title>exclamation mark</title>
   <icon>https://www.gravatar.com/avatar/7e037328867735376c2d34e1ea620242</icon>
   <subtitle>huanranc</subtitle>
-  <link href="/atom.xml" rel="self"/>
+  <link href="/huanranc/atom.xml" rel="self"/>
   
-  <link href="https://github.com/huanranc/huanranc.github.io/"/>
+  <link href="https://github.com/huanranc/"/>
   <updated>2018-03-19T15:33:35.820Z</updated>
-  <id>https://github.com/huanranc/huanranc.github.io/</id>
+  <id>https://github.com/huanranc/</id>
   
   <author>
     <name>Joe</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Class name semantics</title>
-    <link href="https://github.com/huanranc/huanranc.github.io/2017/09/12/my-blog/"/>
-    <id>https://github.com/huanranc/huanranc.github.io/2017/09/12/my-blog/</id>
+    <link href="https://github.com/huanranc/2017/09/12/my-blog/"/>
+    <id>https://github.com/huanranc/2017/09/12/my-blog/</id>
     <published>2017-09-12T15:03:01.000Z</published>
     <updated>2018-03-19T15:33:35.820Z</updated>
     
@@ -35,7 +35,7 @@
     </summary>
     
     
-      <category term="CSS" scheme="https://github.com/huanranc/huanranc.github.io/tags/CSS/"/>
+      <category term="CSS" scheme="https://github.com/huanranc/tags/CSS/"/>
     
   </entry>
   
