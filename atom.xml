@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>exclamation mark</title>
+  <icon>https://www.gravatar.com/avatar/7e037328867735376c2d34e1ea620242</icon>
+  <subtitle>huanranc</subtitle>
+  <link href="/huanranc/atom.xml" rel="self"/>
+  
+  <link href="https://github.com/huanranc/"/>
+  <updated>2018-03-19T15:33:35.820Z</updated>
+  <id>https://github.com/huanranc/</id>
+  
+  <author>
+    <name>Joe</name>
+    <email>huanranjoe@163.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Class name semantics</title>
+    <link href="https://github.com/huanranc/2017/09/12/my-blog/"/>
+    <id>https://github.com/huanranc/2017/09/12/my-blog/</id>
+    <published>2017-09-12T15:03:01.000Z</published>
+    <updated>2018-03-19T15:33:35.820Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="我的看法"><a href="#我的看法" class="headerlink" title="我的看法"></a>我的看法</h4><p>现在，我对CSS类名语义化的理解是，方便给程序员甚至是用户阅读，还有后期代码的维护和重构。因此，对于类名的编写，我们需要不仅能够表示出这个div的在结构中处于什么位置，还要后期维护，不需要修改类名或者在结构上类名会产生误导，不利于阅读。</p><h4 id="类名可以是辅助类名、常用类名"><a href="#类名可以是辅助类名、常用类名" class="headerlink" title="类名可以是辅助类名、常用类名"></a>类名可以是辅助类名、常用类名</h4><hr><p>在bootstrap中，可以看到类名可以在同一结构中反复使用，例如.bg-primary、.display-3<br>、.container、.btn、.clearfix。这些类名不仅可以清楚表现出，它的作用效果还可以方便维护。而且，会发现它的类名比较偏向它表达出来的功能，就像.bg-primary，它是背景颜色，但是它却不是.bg-red、.bg-yellow等等，它是.bg-primary代表主色调，没有明确说出颜色，如果后期需要修改颜色，直接在类名修改，HTML结构不需要修改也不会影响阅读。</p><p>我想到我之前练习的页面，我就不习惯先思考整个页面，然后提取公共样式的类，我都下意识一个div一个样式，照成重复代码很多。或者后期提取公共样式，类名的命名不够好，只能适用于header部分，section部分、article部分，不能适用在整个页面，甚至有多个页面的情况下。这样会照成代码不必要的重复，后期维护也麻烦，要到每个内容块下的类里面修改。</p><h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><hr><p>虽然类名的命名很方便，但是也不能盲目的使用类名，有的标签能清楚的告诉这个内容块代表的是什么，就不必要在使用类名，当然也许需求需要存在类名。如标签h1，h1标签可以告诉我们，这块的内容是网页的大标题，我们就不需要给它类名，像什么huge-title。HTML5新增了语义化标签可以使用了，我们就可以直接使用它，不需要借助div+类名的方式表达这内容块是什么。例如</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;article&quot;&gt;&lt;/div&gt;</span><br><span class="line">/*可以直接使用article标签*/</span><br><span class="line">&lt;article&gt;&lt;/article&gt;</span><br></pre></td></tr></table></figure><p>后者有利于搜索引擎的解析，有助于爬虫抓取更多信息，也方便和其他设备建立连接，如屏幕阅读器。当然也不能乱用，例如main标签只允许在页面中出现一次，你就不可以在页面中多次使用。</p><h4 id="类名处于的结构"><a href="#类名处于的结构" class="headerlink" title="类名处于的结构"></a>类名处于的结构</h4><hr><p>页面一般分为头部，内容，底部。因此我们可能会出现头部有个标题，有个段落，内容也有标题，有个段落，底部也有个标题有个段落。因此，我们可以给类名的命名方式让人感觉又层次感</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;h1&gt;标题&lt;/h1&gt;</span><br><span class="line">    &lt;p class=&quot;header-summary&quot;&gt;段落&lt;/p&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line">&lt;div class=&quot;site-main&quot;&gt;</span><br><span class="line">    &lt;h2 class=&quot;main-title&quot;&gt;标题&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;main-summary&quot;&gt;段落&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;footer&gt;</span><br><span class="line">    &lt;h2 class=&quot;footer-title&quot;&gt;标题&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;footer-summary&quot;&gt;段落&lt;/p&gt;</span><br><span class="line">&lt;/footer&gt;</span><br></pre></td></tr></table></figure><p>ps:关于类名的命名，我还正在学习中，有时候还是会不懂怎么给内容块正确的命名比较好。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;我的看法&quot;&gt;&lt;a href=&quot;#我的看法&quot; class=&quot;headerlink&quot; title=&quot;我的看法&quot;&gt;&lt;/a&gt;我的看法&lt;/h4&gt;&lt;p&gt;现在，我对CSS类名语义化的理解是，方便给程序员甚至是用户阅读，还有后期代码的维护和重构。因此，对于类名的编写，我们需要不仅
+      
+    
+    </summary>
+    
+    
+      <category term="CSS" scheme="https://github.com/huanranc/tags/CSS/"/>
+    
+  </entry>
+  
+</feed>

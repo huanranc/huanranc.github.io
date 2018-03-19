@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Class name semantics | exclamation mark | huanranc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#6666ff">
+    
+    
+    <meta name="keywords" content="CSS">
+    <meta name="description" content="我的看法现在，我对CSS类名语义化的理解是，方便给程序员甚至是用户阅读，还有后期代码的维护和重构。因此，对于类名的编写，我们需要不仅能够表示出这个div的在结构中处于什么位置，还要后期维护，不需要修改类名或者在结构上类名会产生误导，不利于阅读。 类名可以是辅助类名、常用类名 在bootstrap中，可以看到类名可以在同一结构中反复使用，例如.bg-primary、.display-3、.conta">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Class name semantics">
+<meta property="og:url" content="https://github.com/huanranc/2017/09/12/my-blog/index.html">
+<meta property="og:site_name" content="exclamation mark">
+<meta property="og:description" content="我的看法现在，我对CSS类名语义化的理解是，方便给程序员甚至是用户阅读，还有后期代码的维护和重构。因此，对于类名的编写，我们需要不仅能够表示出这个div的在结构中处于什么位置，还要后期维护，不需要修改类名或者在结构上类名会产生误导，不利于阅读。 类名可以是辅助类名、常用类名 在bootstrap中，可以看到类名可以在同一结构中反复使用，例如.bg-primary、.display-3、.conta">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-19T15:33:35.820Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Class name semantics">
+<meta name="twitter:description" content="我的看法现在，我对CSS类名语义化的理解是，方便给程序员甚至是用户阅读，还有后期代码的维护和重构。因此，对于类名的编写，我们需要不仅能够表示出这个div的在结构中处于什么位置，还要后期维护，不需要修改类名或者在结构上类名会产生误导，不利于阅读。 类名可以是辅助类名、常用类名 在bootstrap中，可以看到类名可以在同一结构中反复使用，例如.bg-primary、.display-3、.conta">
+    
+        <link rel="alternate" type="application/atom+xml" title="exclamation mark" href="/huanranc/atom.xml">
+    
+    <link rel="shortcut icon" href="/huanranc/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/huanranc/img/brand.jpg)">
+      <div class="brand">
+        <a href="/huanranc/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/huanranc/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Joe</h5>
+          <a href="mailto:huanranjoe@163.com" title="huanranjoe@163.com" class="mail">huanranjoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/huanranc/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/huanranc/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/huanranc/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/huanranc/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/huanranc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/1809574660/profile?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=3#feedtop" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Class name semantics</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Class name semantics</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-12T15:03:01.000Z" itemprop="datePublished" class="page-time">
+  2017-09-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#我的看法"><span class="post-toc-number">1.</span> <span class="post-toc-text">我的看法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类名可以是辅助类名、常用类名"><span class="post-toc-number">2.</span> <span class="post-toc-text">类名可以是辅助类名、常用类名</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#标签"><span class="post-toc-number">3.</span> <span class="post-toc-text">标签</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#类名处于的结构"><span class="post-toc-number">4.</span> <span class="post-toc-text">类名处于的结构</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-my-blog"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Class name semantics</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-12 23:03:01" datetime="2017-09-12T15:03:01.000Z"  itemprop="datePublished">2017-09-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h4 id="我的看法"><a href="#我的看法" class="headerlink" title="我的看法"></a>我的看法</h4><p>现在，我对CSS类名语义化的理解是，方便给程序员甚至是用户阅读，还有后期代码的维护和重构。因此，对于类名的编写，我们需要不仅能够表示出这个div的在结构中处于什么位置，还要后期维护，不需要修改类名或者在结构上类名会产生误导，不利于阅读。</p>
+<h4 id="类名可以是辅助类名、常用类名"><a href="#类名可以是辅助类名、常用类名" class="headerlink" title="类名可以是辅助类名、常用类名"></a>类名可以是辅助类名、常用类名</h4><hr>
+<p>在bootstrap中，可以看到类名可以在同一结构中反复使用，例如.bg-primary、.display-3<br>、.container、.btn、.clearfix。这些类名不仅可以清楚表现出，它的作用效果还可以方便维护。而且，会发现它的类名比较偏向它表达出来的功能，就像.bg-primary，它是背景颜色，但是它却不是.bg-red、.bg-yellow等等，它是.bg-primary代表主色调，没有明确说出颜色，如果后期需要修改颜色，直接在类名修改，HTML结构不需要修改也不会影响阅读。</p>
+<p>我想到我之前练习的页面，我就不习惯先思考整个页面，然后提取公共样式的类，我都下意识一个div一个样式，照成重复代码很多。或者后期提取公共样式，类名的命名不够好，只能适用于header部分，section部分、article部分，不能适用在整个页面，甚至有多个页面的情况下。这样会照成代码不必要的重复，后期维护也麻烦，要到每个内容块下的类里面修改。</p>
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><hr>
+<p>虽然类名的命名很方便，但是也不能盲目的使用类名，有的标签能清楚的告诉这个内容块代表的是什么，就不必要在使用类名，当然也许需求需要存在类名。如标签h1，h1标签可以告诉我们，这块的内容是网页的大标题，我们就不需要给它类名，像什么huge-title。HTML5新增了语义化标签可以使用了，我们就可以直接使用它，不需要借助div+类名的方式表达这内容块是什么。例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;article&quot;&gt;&lt;/div&gt;</span><br><span class="line">/*可以直接使用article标签*/</span><br><span class="line">&lt;article&gt;&lt;/article&gt;</span><br></pre></td></tr></table></figure>
+<p>后者有利于搜索引擎的解析，有助于爬虫抓取更多信息，也方便和其他设备建立连接，如屏幕阅读器。当然也不能乱用，例如main标签只允许在页面中出现一次，你就不可以在页面中多次使用。</p>
+<h4 id="类名处于的结构"><a href="#类名处于的结构" class="headerlink" title="类名处于的结构"></a>类名处于的结构</h4><hr>
+<p>页面一般分为头部，内容，底部。因此我们可能会出现头部有个标题，有个段落，内容也有标题，有个段落，底部也有个标题有个段落。因此，我们可以给类名的命名方式让人感觉又层次感</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;header&gt;</span><br><span class="line">    &lt;h1&gt;标题&lt;/h1&gt;</span><br><span class="line">    &lt;p class=&quot;header-summary&quot;&gt;段落&lt;/p&gt;</span><br><span class="line">&lt;/header&gt;</span><br><span class="line">&lt;div class=&quot;site-main&quot;&gt;</span><br><span class="line">    &lt;h2 class=&quot;main-title&quot;&gt;标题&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;main-summary&quot;&gt;段落&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;footer&gt;</span><br><span class="line">    &lt;h2 class=&quot;footer-title&quot;&gt;标题&lt;/h2&gt;</span><br><span class="line">    &lt;p class=&quot;footer-summary&quot;&gt;段落&lt;/p&gt;</span><br><span class="line">&lt;/footer&gt;</span><br></pre></td></tr></table></figure>
+<p>ps:关于类名的命名，我还正在学习中，有时候还是会不懂怎么给内容块正确的命名比较好。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-03-19T15:33:35.820Z" itemprop="dateUpdated">2018-03-19 23:33:35</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/huanranc/2017/09/12/my-blog/" target="_blank" rel="external">https://github.com/huanranc/2017/09/12/my-blog/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://github.com/huanranc">
+            <img src="/huanranc/img/avatar.jpg" alt="Joe">
+            Joe
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/huanranc/tags/CSS/">CSS</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/huanranc/2017/09/12/my-blog/&title=《Class name semantics》 — exclamation mark&pic=https://github.com/huanranc/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/huanranc/2017/09/12/my-blog/&title=《Class name semantics》 — exclamation mark&source=所有的惊艳都来自有所准备" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/huanranc/2017/09/12/my-blog/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Class name semantics》 — exclamation mark&url=https://github.com/huanranc/2017/09/12/my-blog/&via=https://github.com/huanranc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/huanranc/2017/09/12/my-blog/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/huanranc/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Joe &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://github.com/huanranc/2017/09/12/my-blog/&title=《Class name semantics》 — exclamation mark&pic=https://github.com/huanranc/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://github.com/huanranc/2017/09/12/my-blog/&title=《Class name semantics》 — exclamation mark&source=所有的惊艳都来自有所准备" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/huanranc/2017/09/12/my-blog/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Class name semantics》 — exclamation mark&url=https://github.com/huanranc/2017/09/12/my-blog/&via=https://github.com/huanranc" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://github.com/huanranc/2017/09/12/my-blog/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIElEQVR42u3aQU4DMQwF0N7/0kVihQQt/zstou7LaiSmSV4WxhP7conH9XN8ff468ne+z3nrV5dnDAwMjJdlXO+O71ucbSiBJcdxcwYMDIw3YJxMl2/r/vHdWjeaEwMDAyPeyizsYmBgYDwj4OaYkzQUAwMDo516tkCCTNZ92Lc4BgbGCzJmhYG/eX56fQMDA+PfM67lSALrbN2jXWFgYKxmtBuaFTJb6iwlxcDA2M04+SjN35ltuk4WMTAwljLay7WTi7m2ISzZLQYGxm5GHuzya7L2zfaDGQMD4z0ZbSo2u+hv08dhmwUGBsY6xkmjQxJq2zaLPPX8gYSBgbGaMSsA5JuYdUrMkkgMDIzdjNn12ayE0DaBJfNgYGDsZiQhsi00Jold2/aBgYGBMWutSFLANrzOWtYwMDC2MvKw2F6KnRQS6o9nDAyM1Yw25J0858XL9moPAwNjN2MW/tpksS2C1v8AMDAwVjPaTbSNFMl1Xhugf6lsYGBgrGOcXNy3YTEvfLYHgYGB8Q6MWdFxxmhXjBrOMDAwVjPOW7WeV/isL+kwMDCWMq7lyH+Vn2IeiG8eHwYGxmrGrD2rTQFPGr8eVonFwMB4cUYeZM8v0ZIEMT8ODAyMd2PkS84C66wtrEgKMTAwMEYXam1m2hYnMDAwMPKFk1TvpDxZ12MxMDCWMvJiwCxotkdT/xUDA2M1Y/YB2RYyT2Z7GAYDA+P1GB/Iq/oIzdueoQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/huanranc/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '不见啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
