@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>debounce and throttle | exclamation mark | huanranc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#6666ff">
+    
+    
+    <meta name="keywords" content="JavaScript">
+    <meta name="description" content="初始防抖和节流经常在各个场景出现，第一次知道是今年五月，一直想写关于抖动和节流的文章，但是一直没动。网上相关文章已经非常丰富了，我就简单记下自己的理解。 debounce(防抖) 在事件触发n秒之后执行回调函数，在此之间如果重新触发事件，则重新计时。 1234567891011121314151617181920212223function ajax(context) &amp;#123;  consol">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="debounce and throttle">
+<meta property="og:url" content="https://huanranc.github.io/2018/10/10/debounce-and-throttle/index.html">
+<meta property="og:site_name" content="exclamation mark">
+<meta property="og:description" content="初始防抖和节流经常在各个场景出现，第一次知道是今年五月，一直想写关于抖动和节流的文章，但是一直没动。网上相关文章已经非常丰富了，我就简单记下自己的理解。 debounce(防抖) 在事件触发n秒之后执行回调函数，在此之间如果重新触发事件，则重新计时。 1234567891011121314151617181920212223function ajax(context) &amp;#123;  consol">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-10-10T15:27:42.820Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="debounce and throttle">
+<meta name="twitter:description" content="初始防抖和节流经常在各个场景出现，第一次知道是今年五月，一直想写关于抖动和节流的文章，但是一直没动。网上相关文章已经非常丰富了，我就简单记下自己的理解。 debounce(防抖) 在事件触发n秒之后执行回调函数，在此之间如果重新触发事件，则重新计时。 1234567891011121314151617181920212223function ajax(context) &amp;#123;  consol">
+    
+        <link rel="alternate" type="application/atom+xml" title="exclamation mark" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Joe</h5>
+          <a href="mailto:huanranjoe@163.com" title="huanranjoe@163.com" class="mail">huanranjoe@163.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/huanranc" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://weibo.com/1809574660/profile?is_search=0&visible=0&is_all=1&is_tag=0&profile_ftype=1&page=3#feedtop" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">debounce and throttle</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">debounce and throttle</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-10-10T14:01:25.000Z" itemprop="datePublished" class="page-time">
+  2018-10-10
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初始"><span class="post-toc-number">1.</span> <span class="post-toc-text">初始</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#debounce-防抖"><span class="post-toc-number">2.</span> <span class="post-toc-text">debounce(防抖)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#throttle-节流"><span class="post-toc-number">3.</span> <span class="post-toc-text">throttle(节流)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">4.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-debounce-and-throttle"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">debounce and throttle</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-10-10 22:01:25" datetime="2018-10-10T14:01:25.000Z"  itemprop="datePublished">2018-10-10</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h3><p>防抖和节流经常在各个场景出现，第一次知道是今年五月，一直想写关于抖动和节流的文章，但是一直没动。网上相关文章已经非常丰富了，我就简单记下自己的理解。</p>
+<h3 id="debounce-防抖"><a href="#debounce-防抖" class="headerlink" title="debounce(防抖)"></a>debounce(防抖)</h3><hr>
+<p>在事件触发n秒之后执行回调函数，在此之间如果重新触发事件，则重新计时。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function ajax(context) &#123;</span><br><span class="line">  console.log(`现在是$&#123;context&#125;`);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function debounce(fun, delay) &#123;</span><br><span class="line">  let timer = null</span><br><span class="line">    return function (args) &#123;</span><br><span class="line">        let that = this // 获取作用域</span><br><span class="line">        let _args = args // 获取对象</span><br><span class="line">        clearTimeout(timer) // 清除正在执行的定时器</span><br><span class="line">        timer = setTimeout(function () &#123; // 重新执行定时器</span><br><span class="line">            fun.call(that, _args)</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let inputb = document.getElementById(&apos;debounce&apos;) </span><br><span class="line">let debounceAjax = debounce(ajax, 1000) </span><br><span class="line"></span><br><span class="line">    inputb.addEventListener(&apos;keyup&apos;, function (e) &#123; </span><br><span class="line">      debounceAjax(e.target.value) </span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<p>这个例子是让我想到之前做搜索框，想边输入边搜索，但是这样会频繁请求，最后让它只有点击确定才可以触发请求搜索的函数。但是加入防抖，频繁输入并不会触发请求，只有在停止输入的时候才会发起请求，但是在此之间再次输入就会再次发起请求。</p>
+<h3 id="throttle-节流"><a href="#throttle-节流" class="headerlink" title="throttle(节流)"></a>throttle(节流)</h3><p>节流有两种方法，一种是时间戳，一种是定时器。它和防抖的区别，它不是间隔时间执行，它是某段时间内只触发一次。如果这个单位时间内多次触发，也只有一次时间生效。</p>
+<p>接下来的例子是关于时间戳的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function throttle(fun, delay) &#123;</span><br><span class="line">      let last, deferTimer</span><br><span class="line">      return function (args) &#123;</span><br><span class="line">          let that = this</span><br><span class="line">          let _args = arguments</span><br><span class="line">          let now = +new Date()</span><br><span class="line">          if (last &amp;&amp; now &lt; last + delay) &#123;</span><br><span class="line">              clearTimeout(deferTimer)</span><br><span class="line">              deferTimer = setTimeout(function () &#123;</span><br><span class="line">                  last = now</span><br><span class="line">                  fun.apply(that, _args)</span><br><span class="line">              &#125;, delay)</span><br><span class="line">          &#125;else &#123; </span><br><span class="line">/* 当高频繁事件，第一次应该会立即执行（当时间间隔和当前绑定的时间大于delay) */</span><br><span class="line">              last = now</span><br><span class="line">              fun.apply(that,_args)</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  let throttleAjax = throttle(ajax, 1000)</span><br><span class="line"></span><br><span class="line">  let inputc = document.getElementById(&apos;throttle&apos;)</span><br><span class="line">  inputc.addEventListener(&apos;keyup&apos;, function(e) &#123;</span><br><span class="line">      throttleAjax(e.target.value)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>定时器的实现</p>
+<p>当 触发时间时，设置一个定时器，再次触发事件,如果定时器存在就不执行,直到delay秒后,定时器执行函数,清空定时器,就可以设置下个定时器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">fucntion throttle(func, delay)&#123; </span><br><span class="line">  let timer = null; return funtion()&#123; </span><br><span class="line">    let context = this; </span><br><span class="line">    let args = arguments; </span><br><span class="line"></span><br><span class="line">    if(!timer)&#123; </span><br><span class="line">      timer = setTimeout(function()&#123; </span><br><span class="line">      func.apply(context, args); </span><br><span class="line">      timer = null; &#125;, delay); </span><br><span class="line">    &#125; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当第一次触发事件时，肯定不会立即执行函数，而是在delay秒后才执行。 </p>
+<p>之后连续不断触发事件，也会每delay秒执行一次。<br>当最后一次停止触发后，由于定时器的delay延迟，可能还会执行一次函数。</p>
+<p>节流也可以用在搜索，可能比防抖更符合我想边搜索边有提示的需求。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>防抖和节流都是防止在某个时间内频繁触发事件，但是二者的原理不同。前者是间隔事件触发，后者是某段时间内只触发一次。</p>
+<p>这两个场景用在输入框，搜索，滚动条都可以。</p>
+<p>具体举例：</p>
+<p>debounce</p>
+<ul>
+<li>search搜索联想，用户在不断输入值时，用防抖来节约请求资源。</li>
+<li>window触发resize的时候，不断的调整浏览器窗口大小会不断的触发这个事件，用防抖来让其只触发一次</li>
+</ul>
+<p>throttle</p>
+<ul>
+<li>鼠标不断点击触发，mousedown(单位时间内只触发一次)</li>
+<li>监听滚动事件，比如是否滑到底部自动加载更多，用throttle来判断</li>
+</ul>
+<p>参考文章：</p>
+<p><a href="https://juejin.im/post/5b8de829f265da43623c4261" title="Markdown" target="_blank" rel="noopener">7分钟理解JS的节流、防抖及使用场景</a></p>
+<p><a href="https://blog.csdn.net/sml115/article/details/81280101" title="Markdown" target="_blank" rel="noopener">JS简单实现防抖和节流</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-10-10T15:27:42.820Z" itemprop="dateUpdated">2018-10-10 23:27:42</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/10/10/debounce-and-throttle/" target="_blank" rel="external">https://huanranc.github.io/2018/10/10/debounce-and-throttle/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://huanranc.github.io">
+            <img src="/img/avatar.jpg" alt="Joe">
+            Joe
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/&title=《debounce and throttle》 — exclamation mark&pic=https://huanranc.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/&title=《debounce and throttle》 — exclamation mark&source=所有的惊艳都来自有所准备" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://huanranc.github.io/2018/10/10/debounce-and-throttle/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《debounce and throttle》 — exclamation mark&url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/&via=https://huanranc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/21/page/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">关于搜索框的正则</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>Joe &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/&title=《debounce and throttle》 — exclamation mark&pic=https://huanranc.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/&title=《debounce and throttle》 — exclamation mark&source=所有的惊艳都来自有所准备" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://huanranc.github.io/2018/10/10/debounce-and-throttle/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《debounce and throttle》 — exclamation mark&url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/&via=https://huanranc.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://huanranc.github.io/2018/10/10/debounce-and-throttle/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACRklEQVR42u3a227CMBBFUf7/p1OpT5VaO/uMTUXG208IQuIF0mgufr3wur7X6PXPd0bv/76G323bkiFDxmMZ13SNNkEAHDzHz/cmQ4aMcxi1UDh/JN/cSpiWIUOGjPk1KZJsV4YMGTJ2BVySSs7vTNJQGTJkyEiLWNIIIwVnLVncVovLkCHjgYz1wcD7Xv/rfEOGDBkfybjCRVpsvNxN7zl8lgwZMloz5uPJtK22csAiLZ5fpK6VIUNGC0atHZYerSAhmA8Y0P8gQ4aMRox0JLkrvUsDPd+bDBky+jHSI1xpMOUJZdrgG9biMmTIaMeojR7n4ZI8PmWQcC9DhoxzGOulaW1gyVtsQetNhgwZLRi1NhYH8CEBD+XDDFeGDBlNGbUxZNomS7eYlrIyZMg4gcGHiLxxthJ8i8c+ZMiQ0ZSRDiBrITWeoALYzf8gQ4aMRoyg4Y5TwBojTUnjDFeGDBkPZ/BE8AKLB9C0PL6hypAhoymDpHRkW2kSmR47uwHLkCGjNYN8rZbMpS1+0uyLc1sZMmS0YJAUME0Wdw1Eg1AuQ4aMAxi1Rvx6iVtrwN0UsTJkyGjHWIlXK8Vq2qRDwwkZMmQ0ZVzhSttt/DAHH6b+8akMGTJaM2phjofa2tEN3oyTIUPGOQwSZNNideU3SwO9DBkyzmGQwLe5QVY62CFDhgwZKylabWCZjlRvzozIkCFDBknRwvFAbRiwIeDKkCHjgQxSiKbFba1MTYejMmTIOIGxUkCSwpUf2uCkbSNMGTJkfDrjC7Ft0T8r7VKyAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '不见啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
